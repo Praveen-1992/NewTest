@@ -1,0 +1,43 @@
+name: Build and Run Docker
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-run-docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Docker Buildx (required for multi-platform builds, optional)
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # Build the Docker image
+      - name: Build Docker Image
+        run: |
+          docker build -t newtest-runner .
+
+      # Run the Docker container
+      - name: Run Docker Container
+        run: |
+          docker run --name newtest-container -p 7993:7993 newtest-runner
+
+      # Check logs (for debugging purposes)
+      - name: Fetch Container Logs
+        run: |
+          docker logs newtest-container
+
+      # Stop and Remove the container after completion
+      - name: Cleanup
+        run: |
+          docker stop newtest-container
+          docker rm newtest-container
