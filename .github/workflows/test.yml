@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-run-docker:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       # Checkout the repository code
