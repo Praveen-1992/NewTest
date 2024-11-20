@@ -24,20 +24,20 @@ jobs:
       # Build the Docker image
       - name: Build Docker Image
         run: |
-          docker build -t newtest23-runner .
+          docker build -t newtest24-runner .
 
       # Run the Docker container
       - name: Run Docker Container
         run: |
-          docker run --name newtest23-container -p 7993:7993 newtest23-runner
+          docker run --name newtest24-container -p 7993:7993 newtest24-runner
 
       # Check logs (for debugging purposes)
       - name: Fetch Container Logs
         run: |
-          docker logs newtest23-container
+          docker logs newtest24-container
 
       # Stop and Remove the container after completion
       - name: Cleanup
         run: |
-          docker stop newtest23-container
-          docker rm newtest23-container
+          docker stop newtest24-container
+          docker rm newtest24-container
