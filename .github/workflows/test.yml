@@ -1,8 +1,8 @@
 on: [push]
 jobs:
-  jmeter_job:
+  zebratest_job:
     runs-on: self-hosted
-    name: JMeter Test Execution
+    name: Zebra Test Execution
     steps:      
     - name: Checkout
       uses: actions/checkout@v3
@@ -10,7 +10,8 @@ jobs:
     - name: Run Zebra Tests
       uses: ./
       with:
-        test-plan-path: ./Platform_Prod_US_v2
+        test-plan-path: ./Platform_Prod_US_v2.class
+        args: "-u 1 -d 90 -t 60 -sdelay 200 -maxloops 1 -sampling 15 -percpage 100 -percurl 20 -maxerrmem 20 -nolog"
       
         
   
